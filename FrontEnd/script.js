@@ -47,6 +47,7 @@ async function main() {
   }
 
   function generateModalGallery(works) {
+    
     let gallery = document.querySelector(".modal-gallery");
     let newHtmlGallery = "";
     works.forEach((work) => {
@@ -59,6 +60,7 @@ async function main() {
               `;
     });
     gallery.innerHTML = newHtmlGallery;
+    attachDeleteEventListeners()
   }
 
   async function getAllWorks() {
@@ -173,19 +175,10 @@ async function main() {
       // console.log(data);
 
       const data = await response.status;
-      console.log("====>", data);
       console.log("Projet supprimé avec succès:");
       // Vous pouvez mettre à jour l'interface utilisateur ou effectuer d'autres actions après la suppression
-      console.log(works);
       works = works.filter((work) => work.id !== projectIdNumber);
-      console.log(works);
-      console.log("projectId:", projectIdNumber);
-      console.log(
-        "works:",
-        works.map((work) => work.id)
-      );
       generateModalGallery(works);
-      attachDeleteEventListeners();
       generateGallery(works);
       resetImagePreview();
     } catch (error) {
@@ -264,7 +257,6 @@ async function main() {
       works.push(data);
       generateGallery(works);
       generateModalGallery(works);
-      attachDeleteEventListeners();
       resetImagePreview();
     } catch (error) {
       console.error("Erreur lors de la requête à l'API :", error);
@@ -272,4 +264,4 @@ async function main() {
   }
 }
 
-main();
+main()

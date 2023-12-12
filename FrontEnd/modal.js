@@ -9,9 +9,15 @@ function openModal(e) {
     modal.style.display = null
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
-    modal.addEventListener("click", closeModal)
+    modal.addEventListener("click", () => {    
+        closeModal(e);
+        resetImagePreview();    
+   })
     modal.querySelector(".croix").addEventListener("click", closeModal)
-    modal.querySelector(".add-croix").addEventListener("click", closeModal)
+    modal.querySelector(".add-croix").addEventListener("click", () => {    
+        closeModal(e);
+        resetImagePreview();    
+   })
     modal.querySelector(".add-picture").addEventListener("click", stopPropagation)
     modal.querySelector(".modal-content").addEventListener("click", stopPropagation)
 } 
@@ -48,6 +54,7 @@ function stopPropagation(e) {
 window.addEventListener('keydown', function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
+        resetImagePreview()
     }
 })
 
@@ -183,6 +190,7 @@ const labelInputElment = document.getElementById('label-add')
 
 // reset de l'image et du formulaire au changement de la modal
 document.getElementById('return').addEventListener('click', resetImagePreview)
+
 
 
 // validation du formulaire 
